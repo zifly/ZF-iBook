@@ -1,0 +1,23 @@
+{
+  "name": "zf-ibook",
+  "version": "1.0.0",
+  "description": "create kindle books",
+  "main": "index.js",
+  "dependencies": {
+    "commander": "^2.18.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "this is a project for kindle books"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zifly/ZF-iBook.git"
+  },
+  "author": "yvev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zifly/ZF-iBook/issues"
+  },
+  "homepage": "https://github.com/zifly/ZF-iBook#readme"
+}
