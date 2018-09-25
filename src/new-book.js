@@ -1,19 +1,11 @@
 #!/usr/bin/env node
 
-
 var readline = require('readline');
-
-
 var fs=require('fs')
 var exists = require('fs').existsSync
-var path = require('path')  
 
-var arguments = process.argv;
-var bookname;
-var bookfolder;
 bookroot=process.cwd();
 
-    
     var tags=new Array(
         'book Name',
         'book Author',
@@ -24,7 +16,12 @@ bookroot=process.cwd();
         '',
         'zh'
     )
-    
+
+//下面终于解决了readline输入中文值并写入文件乱码的问题
+//readline 同步 中文输入始终乱码
+//改为异步，能够成功
+//readline.question()就是一个坑
+//引导用户一步一步输入，realine.setPrompt()改提示语，通过'line'取得每次输入的数据    
 
 const rinput = readline.createInterface({
   input: process.stdin,
@@ -48,18 +45,13 @@ rinput.on('line', (lineinput)=> {
             console.log("\x1B[35mBook Name Can NOT be Null");
             linenum--;
             tag=tags[linenum];
-            
         }
-        
     }
     
         if(linenum>values.length-1) rinput.close();
         if (linenum>0) values[linenum-1]=lineinput;
         rinput.setPrompt('\x1B[32m'+tag+": \x1B[37m");
         rinput.prompt();
-    
-    
-        
 });
 
 rinput.on('close',()=>{
@@ -81,10 +73,11 @@ rinput.on('close',()=>{
     }
     process.exit(0);
 });
-    
+
+//=============================================================
+// followings private function
+
 function createfolder(p,s){
-    //console.log("creating book folder... ...");
-    
     s=foldername(s);
     ff=p+'\\'+s;
     if(exists(ff)==false){
@@ -136,8 +129,6 @@ function getbookjson(arr){
     str=str+'   }\r\n';
     
     console.log("=================================");
-    
-    
     
     return str;
 }
